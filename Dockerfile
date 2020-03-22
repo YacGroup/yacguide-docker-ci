@@ -6,7 +6,7 @@ FROM openjdk:11-jdk-buster
 # Install required OS packages
 RUN \
    apt-get update && \
-   apt-get install --yes git wget apt-utils unzip make && \
+   apt-get install --yes git wget apt-utils unzip make ruby ruby-dev g++ && \
    apt-get autoclean
 
 # Must match version in file `app/build.gradle`
@@ -33,3 +33,6 @@ RUN echo y | ${SDK_MANAGER} --install \
    "platforms;android-${ANDROID_COMPILE_SDK}" \
    "platform-tools" \
    "build-tools;${ANDROID_BUILD_TOOLS}"
+
+# Install Fastlane
+RUN gem install fastlane -N
