@@ -36,3 +36,4 @@ RUN echo y | ${SDK_MANAGER} --install \
 
 # Install Fastlane
 RUN gem install fastlane -N
+RUN gem install json
