@@ -1,7 +1,7 @@
 # This Dockerfile creates a static build image for the CI.
 # The image will available at the Docker Hub registry.
 
-FROM openjdk:8-jdk
+FROM openjdk:11-jdk-buster
 
 # Install required OS packages
 RUN \
@@ -9,23 +9,27 @@ RUN \
    apt-get install --yes git wget apt-utils unzip make && \
    apt-get autoclean
 
-# Matched version in `app/build.gradle`
+# Must match version in file `app/build.gradle`
 ENV ANDROID_COMPILE_SDK "28"
-# Matched version in `app/build.gradle`
+# Must match version in file `app/build.gradle`
 ENV ANDROID_BUILD_TOOLS "28.0.3"
-# Version from https://developer.android.com/studio/releases/sdk-tools
-ENV ANDROID_SDK_TOOLS "26.1.1"
+# See https://developer.android.com/studio/ for latest version
+ENV ANDROID_SDK_TOOLS "6200805"
 ENV ANDROID_HOME /usr/local/android-sdk
-ENV PATH="${PATH}:${ANDROID_HOME}/platform-tools/"
+ENV PATH="${PATH}:${ANDROID_HOME}/tools/bin"
+ENV SDK_MANAGER="sdkmanager --sdk_root=${ANDROID_HOME}"
 
 # Install Android SDK tools
 RUN mkdir -p ${ANDROID_HOME}
 WORKDIR ${ANDROID_HOME}
-# FIXME: The version of the file do not match the version at
-#        https://developer.android.com/studio/releases/sdk-tools
-RUN wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
-RUN unzip android-sdk.zip
+RUN wget \
+   --quiet \
+   --output-document=android-sdk.zip \
+   https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS}_latest.zip && \
+   unzip android-sdk.zip
 WORKDIR /root
-RUN echo y | ${ANDROID_HOME}/tools/android --use-sdk-wrapper update sdk --no-ui --all --filter android-${ANDROID_COMPILE_SDK}
-RUN echo y | ${ANDROID_HOME}/tools/android --use-sdk-wrapper update sdk --no-ui --all --filter platform-tools
-RUN echo y | ${ANDROID_HOME}/tools/android --use-sdk-wrapper update sdk --no-ui --all --filter build-tools-${ANDROID_BUILD_TOOLS}
+# Install Android packages
+RUN echo y | ${SDK_MANAGER} --install \
+   "platforms;android-${ANDROID_COMPILE_SDK}" \
+   "platform-tools" \
+   "build-tools;${ANDROID_BUILD_TOOLS}"
