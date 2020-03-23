@@ -24,9 +24,10 @@ RUN mkdir -p ${ANDROID_HOME}
 WORKDIR ${ANDROID_HOME}
 RUN wget \
    --quiet \
-   --output-document=android-sdk.zip \
+   --output-document=android-sdk-tools.zip \
    https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS}_latest.zip && \
-   unzip android-sdk.zip
+   unzip android-sdk-tools.zip && \
+   rm -f android-sdk-tools.zip
 WORKDIR /root
 # Install Android packages
 RUN echo y | ${SDK_MANAGER} --install \
