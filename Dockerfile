@@ -36,5 +36,6 @@ RUN echo y | ${SDK_MANAGER} --install \
    "build-tools;${ANDROID_BUILD_TOOLS}"
 
 # Install Fastlane and all required Ruby Gems
-RUN gem install fastlane --version 2.144 --no-document
-RUN gem install json --version 2.3.0 --no-document
+RUN gem install fastlane -N -v 2.144
+RUN gem install json -N -v 2.3.0
+RUN gem install signet -N -v 0.13.0
