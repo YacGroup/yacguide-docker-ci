@@ -5,7 +5,7 @@ FROM debian:buster
 
 RUN \
    apt-get update && \
-   apt-get install -y locales git wget apt-utils unzip make bundler python3-minimal python3-git openjdk-11-jdk-headless && \
+   apt-get install -y locales git wget apt-utils unzip make bundler python3-minimal python3-git python3-packaging openjdk-11-jdk-headless && \
    apt-get autoremove -y && \
    apt-get autoclean && \
    apt-get clean && \
