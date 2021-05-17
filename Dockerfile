@@ -20,11 +20,11 @@ ENV LANG=en_US.UTF-8
 # Must match compileSdkVersion in file `app/build.gradle`
 ENV ANDROID_COMPILE_SDK "29"
 # Must match version in file `app/build.gradle`
-ENV ANDROID_BUILD_TOOLS "29.0.2"
+ENV ANDROID_BUILD_TOOLS "30.0.2"
 # See https://developer.android.com/studio#cmdline-tools for latest version
-ENV ANDROID_CMDLINE_TOOLS "6609375"
+ENV ANDROID_CMDLINE_TOOLS "7302050"
 ENV ANDROID_HOME /opt/android-sdk
-ENV PATH="${PATH}:${ANDROID_HOME}/tools/bin"
+ENV PATH="${PATH}:${ANDROID_HOME}/cmdline-tools/bin"
 ENV SDK_MANAGER="sdkmanager --sdk_root=${ANDROID_HOME}"
 
 # Install Android SDK tools
