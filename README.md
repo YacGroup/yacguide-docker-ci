@@ -1,5 +1,7 @@
 ## [YacGuide] Docker Build Environment
 
+[![CI](https://github.com/YacGroup/yacguide-docker-ci/actions/workflows/ci.yaml/badge.svg)](https://github.com/YacGroup/yacguide-docker-ci/actions/workflows/ci.yaml)
+
 This is the Docker image for building the [YacGuide] Android app.
 
 The image can be found at the [Docker hub].
