@@ -1,3 +1,6 @@
+> [!WARNING]
+> This repo is not longer used by the [YacGuide](https://github.com/YacGroup/yacguide) repository.
+
 # [YacGuide] Docker Build Environment
 
 [![CI](https://github.com/YacGroup/yacguide-docker-ci/actions/workflows/ci.yaml/badge.svg)](https://github.com/YacGroup/yacguide-docker-ci/actions/workflows/ci.yaml)
